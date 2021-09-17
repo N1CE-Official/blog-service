@@ -1,0 +1,55 @@
+<configuration>
+
+  <appender name="DebugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>C:/log_n1ce/n1ce_debug.log</file>
+    
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>C:/log_n1ce/%d{yyyy-MM,aux}/n1ce_debug-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>50MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    
+    <encoder>
+      <pattern>%date %level [%X{VERSION}] [%X{ID_TRANSACTION}] [%X{USER}] [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>C:/log_n1ce/n1ce_error.log</file>    
+	  <filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+         <level>ERROR</level> 
+         <onMatch>ACCEPT</onMatch> 
+		<onMismatch>DENY</onMismatch>          
+      </filter> 
+      
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>C:/log_n1ce/%d{yyyy-MM,aux}/n1ce_error-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>50MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+         
+    <encoder>
+      <pattern>%date %level [%X{VERSION}] [%X{ID_TRANSACTION}] [%X{USER}] [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date %level [%X{VERSION}] [%X{ID_TRANSACTION}] [%X{USER}] [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.n1ce"  level="DEBUG" additivity="false">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="DebugAppender"/>
+    <appender-ref ref="ErrorAppender"/>
+  </logger>
+
+  <root level="ERROR">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="DebugAppender"/>
+    <appender-ref ref="ErrorAppender"/>
+  </root>
+</configuration>

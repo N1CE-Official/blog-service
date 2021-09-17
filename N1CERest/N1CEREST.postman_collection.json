@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "d2abf827-17e0-4fd0-adef-39dce0793c1c",
+		"name": "N1CEREST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "INSERT POSTS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"userId\": 1,\r\n   \"id\": 1,\r\n   \"title\": \"The Second Post\",\r\n   \"body\": \"we are building a blog post API using OpenAPI Specification.\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/N1CERest/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"N1CERest",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE POSTS",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"userId\": 1,\r\n   \"id\": 1,\r\n   \"title\": \"The First Post 2\",\r\n   \"body\": \"we are building a blog post API using OpenAPI Specification.\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/N1CERest/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"N1CERest",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTS LIST",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "x_username",
+						"value": "fabio-lagana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/N1CERest/posts/detail/postsList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"N1CERest",
+						"posts",
+						"detail",
+						"postsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTS BY ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/N1CERest/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"N1CERest",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTS DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/N1CERest/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"N1CERest",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
