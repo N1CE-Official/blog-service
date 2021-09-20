@@ -83,6 +83,22 @@ public class PostManager {
 		}
 		return list;
 	}
+
+
+	public List<Post> getPostByCategory(String category) {
+		logger.debug("Start - getPostByCategory");
+		List<Post> list;
+
+		try {
+			list = postRepository.findPostByCategory(category);
+		} catch (Exception e) {
+			logger.error("The error is: ", e);
+			throw e;
+		} finally {
+			logger.debug("End - getPostByCategory");
+		}
+		return list;
+	}
 	
 	
 

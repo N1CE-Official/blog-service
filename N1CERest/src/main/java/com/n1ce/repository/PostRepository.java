@@ -17,5 +17,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
 	
 	void deleteById(String id);
 
+	List<Post> findPostByCategory(String category);
 	
 }

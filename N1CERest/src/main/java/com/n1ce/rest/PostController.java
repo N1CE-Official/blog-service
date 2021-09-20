@@ -34,7 +34,7 @@ public class PostController {
        try {
        	
 	       	logger.info("post");
-	       	Utility.checkParameters(new Object[]{post.getUserId(), post.getTitle(), post.getBody()});
+	       	Utility.checkParameters(new Object[]{post.getExpertId(), post.getTitle(), post.getContent()});
 	       	postManager.post(post);
 	       
        } catch (Exception e) {
@@ -53,7 +53,7 @@ public class PostController {
        try {
        	
 	       	logger.info("post");
-       		Utility.checkParameters(new Object[]{post.getId(), post.getUserId(), post.getTitle(), post.getBody()});
+       		Utility.checkParameters(new Object[]{post.getId(), post.getExpertId(), post.getTitle(), post.getContent()});
 	       	postManager.post(post);
 	       
        } catch (Exception e) {
@@ -124,6 +124,26 @@ public class PostController {
             logger.debug("End - postList");
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = RestURIConstants.GET_POSTS_BY_CATEGORY, method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> getPostByCategory(@PathVariable("category") String category) {
+
+        logger.debug("Start - getPostByCategory");
+        List<Post> posts;
+
+        try {
+            Utility.checkParameters(new Object[]{category});
+            logger.info("getPost - category {} ", category);
+            posts = postManager.getPostByCategory(category);
+            
+        } catch (Exception e) {
+            logger.error("The error is: ", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } finally {
+            logger.debug("End - getPostByCategory");
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
 }
