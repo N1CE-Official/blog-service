@@ -10,6 +10,7 @@ public class RestURIConstants {
     //public static final String PUT_POSTS_BY_ID = "/posts/{id}";
     public static final String DELETE_POSTS_BY_ID = "/posts/{id}";
     public static final String GET_POSTS_BY_CATEGORY = "/posts/{category}";
+    public static final String POST_POSTS_PAGED = "/posts/paged";
     
     //BLOG CATEGORY
 	public static final String POST_BC = "/blog-category";
@@ -25,6 +26,7 @@ public class RestURIConstants {
 	public static final String GET_UFP_BY_ID = "/user-favorite-post/{id}";
 	public static final String GET_UFP_LIST = "/user-favorite-post/list";
 	public static final String DELETE_UFP_BY_ID = "/user-favorite-post/{id}";
+	
     
 
 }

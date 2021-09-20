@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.n1ce.manager.PostManager;
+import com.n1ce.model.N1cePageble;
 import com.n1ce.model.Post;
 import com.n1ce.utils.Constants;
 import com.n1ce.utils.RestURIConstants;
@@ -145,5 +146,22 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
+    
+    @RequestMapping(value = RestURIConstants.POST_POSTS_PAGED, method = RequestMethod.POST)
+    public ResponseEntity<List<Post>> getPostPaged(@RequestBody N1cePageble filter) {
+       logger.debug("Start - getPostPaged");
+       List<Post> posts;
+       try {
+	       	Utility.checkParameters(new Object[]{filter.getField(), filter.getOffset(), filter.getPage()});
+	       	posts=postManager.getPostPaged(filter);
+	       
+       } catch (Exception e) {
+           logger.error("The error is: ", e);
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       } finally {
+           logger.debug("End - getPostPaged");
+       }
+       return new ResponseEntity<>(posts, HttpStatus.OK);
+   }
 
 }

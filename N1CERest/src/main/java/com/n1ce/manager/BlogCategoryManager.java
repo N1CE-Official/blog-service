@@ -20,26 +20,26 @@ public class BlogCategoryManager {
 
 	private static final Logger logger = LoggerFactory.getLogger(BlogCategoryManager.class);    
 
-	public void save(BlogCategory post) {
-		logger.debug("Start - bc");
+	public void save(BlogCategory bc) {
+		logger.debug("Start - save - BlogCategoryManager");
 
 		try {
-			bcRepository.save(post);
+			bcRepository.save(bc);
 		} catch (Exception e) {
 			logger.error("The error is: ", e);
 			throw e;
 		} finally {
-			logger.debug("End - bc");
+			logger.debug("End - save - BlogCategoryManager");
 		}
 	}
 
 
 	public BlogCategory getBlogCategory(String id) {
 		logger.debug("Start - getBlogCategory - id: {}", id);
-		BlogCategory post;
+		BlogCategory bc;
 
 		try {
-			post = bcRepository.findBlogCategoryById(id);
+			bc = bcRepository.findBlogCategoryById(id);
 		} catch (Exception e) {
 			logger.error("The error is: ", e);
 			throw e;
@@ -47,7 +47,7 @@ public class BlogCategoryManager {
 			logger.debug("End - getBlogCategory");
 		}
 
-		return post;
+		return bc;
 	}
 	
 	public boolean deleteBlogCategory(String id) throws Exception {
@@ -69,8 +69,8 @@ public class BlogCategoryManager {
     }
 	
 	
-	public List<BlogCategory> bcList() {
-		logger.debug("Start - bcList");
+	public List<BlogCategory> list() {
+		logger.debug("Start - list - BlogCategoryManager");
 		List<BlogCategory> list;
 
 		try {
@@ -79,7 +79,7 @@ public class BlogCategoryManager {
 			logger.error("The error is: ", e);
 			throw e;
 		} finally {
-			logger.debug("End - bcList");
+			logger.debug("End - list - BlogCategoryManager");
 		}
 		return list;
 	}

@@ -25,7 +25,7 @@ public class BlogCategoryController {
     private static final Logger logger = LoggerFactory.getLogger(BlogCategoryController.class);
 
     @Autowired
-    private BlogCategoryManager blocCategoryManager;    
+    private BlogCategoryManager manager;    
     
     @RequestMapping(value = RestURIConstants.POST_BC, method = RequestMethod.POST)
     public ResponseEntity<String> blogCategorySave(@RequestBody BlogCategory post) {
@@ -35,7 +35,7 @@ public class BlogCategoryController {
        	
 	       	logger.info("post");
 	       	Utility.checkParameters(new Object[]{post.getTitle(), post.getArticlesPerRow()});
-	       	blocCategoryManager.save(post);
+	       	manager.save(post);
 	       
        } catch (Exception e) {
            logger.error("The error is: ", e);
@@ -47,20 +47,20 @@ public class BlogCategoryController {
    }
     
     @RequestMapping(value = RestURIConstants.PUT_BC, method = RequestMethod.PUT)
-    public ResponseEntity<String> postPut(@RequestBody BlogCategory post) {
-       logger.debug("Start - post");
+    public ResponseEntity<String> updateBlogCategory(@RequestBody BlogCategory post) {
+       logger.debug("Start - updateBlogCategory");
        
        try {
        	
-	       	logger.info("post");
-	       	Utility.checkParameters(new Object[]{post.getTitle(), post.getArticlesPerRow()});
-	       	blocCategoryManager.save(post);
+	       	logger.info("putBlogCategory");
+	       	Utility.checkParameters(new Object[]{post.getId(), post.getTitle(), post.getArticlesPerRow()});
+	       	manager.save(post);
 	       
        } catch (Exception e) {
            logger.error("The error is: ", e);
            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
        } finally {
-           logger.debug("End - post");
+           logger.debug("End - updateBlogCategory");
        }
        return new ResponseEntity<>(Constants.RESULT_OK, HttpStatus.OK);
    }
@@ -68,14 +68,13 @@ public class BlogCategoryController {
     
     @RequestMapping(value = RestURIConstants.GET_BC_BY_ID, method = RequestMethod.GET)
     public ResponseEntity<BlogCategory> getBlogCategory(@PathVariable("id") String id) {
-
         logger.debug("Start - getBlogCategory");
         BlogCategory post;
 
         try {
             Utility.checkParameters(new Object[]{id});
             logger.info("getBlogCategory - id {} ", id);
-            post = blocCategoryManager.getBlogCategory(id);
+            post = manager.getBlogCategory(id);
             
         } catch (Exception e) {
             logger.error("The error is: ", e);
@@ -88,7 +87,6 @@ public class BlogCategoryController {
 
     @RequestMapping(value = RestURIConstants.DELETE_BC_BY_ID, method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteBlogCategory(@PathVariable("id") String id) {
-
         logger.debug("Start - deleteBlogCategory");
         boolean esito;
         String result = Constants.RESULT_KO;
@@ -96,7 +94,7 @@ public class BlogCategoryController {
         try {
             Utility.checkParameters(new Object[]{id});
             logger.info("deleteBlogCategory - id {} ", id);
-            esito = blocCategoryManager.deleteBlogCategory(id);
+            esito = manager.deleteBlogCategory(id);
             if(esito)result = Constants.RESULT_OK;
             
         } catch (Exception e) {
@@ -109,19 +107,19 @@ public class BlogCategoryController {
     }
   
     @RequestMapping(value = RestURIConstants.GET_BC_LIST, method = RequestMethod.GET)
-    public ResponseEntity<List<BlogCategory>> postList() {
-        logger.debug("Start - bcList");
+    public ResponseEntity<List<BlogCategory>> list() {
+        logger.debug("Start - list - BlogCategoryController");
         List<BlogCategory> list;
 
         try {
             logger.info("bcList");
-            list = blocCategoryManager.bcList();
+            list = manager.list();
             
         } catch (Exception e) {
             logger.error("The error is: ", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
-            logger.debug("End - bcList");
+            logger.debug("End - list - BlogCategoryController");
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
